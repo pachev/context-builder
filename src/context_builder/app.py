@@ -8,6 +8,7 @@ import signal
 from typing import Any, Dict, List, Tuple, Optional
 from fnmatch import fnmatch
 
+import tiktoken
 from PyQt6.QtGui import QFont, QAction, QStandardItem, QStandardItemModel
 from PyQt6.QtCore import Qt, QSize, QTimer
 from PyQt6.QtWidgets import (
@@ -76,10 +77,27 @@ def add_line_numbers(content: str) -> str:
     return '\n'.join(numbered_lines)
 
 
-def estimate_tokens(text: str) -> int:
-    """Estimate token count using a simple heuristic"""
-    # GPT models use roughly 4 characters per token on average
-    return len(text) // 4
+def estimate_tokens(text: str, model: str = 'gpt-4') -> int:
+    """
+    Count tokens using the tiktoken library for accurate estimates
+
+    Args:
+        text: The text to count tokens for
+        model: The model name to use for encoding (default: gpt-4)
+
+    Returns:
+        The number of tokens in the text
+    """
+    try:
+        # Get the encoding for the specified model
+        enc = tiktoken.encoding_for_model(model)
+
+        # Count tokens
+        return len(enc.encode(text))
+    except (KeyError, ImportError, ModuleNotFoundError):
+        # Fall back to simple approximation if model not found or tiktoken unavailable
+        # GPT models use roughly 4 characters per token on average
+        return len(text) // 4
 
 
 def generate_project_tree(
