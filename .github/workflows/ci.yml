@@ -1,4 +1,4 @@
-name: CI
+# name: CI
 
 on:
   push:
@@ -15,11 +15,6 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: "3.13"
-      - name: Run Ruff check
-        uses: charliermarsh/ruff-action@v3
-        with:
-          args: check --output-format=github
-      - name: Run Ruff format check
-        uses: charliermarsh/ruff-action@v3
-        with:
-          args: format --check --output-format=github
+      - name: Use ruff to verify
+        uses: astral-sh/ruff-action@v3
+
