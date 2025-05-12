@@ -19,7 +19,7 @@ A native macOS app for building context files for LLMs. This tool allows you to 
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/yourusername/context-builder.git
+git clone https://github.com/pachev/context-builder
 cd context-builder
 ```
 
@@ -32,16 +32,6 @@ uv sync
 ```bash
 uv pip install -e .
 ```
-
-### Option 2: Build macOS app bundle
-
-To create a standalone macOS application:
-
-```bash
-uv run py2app
-```
-
-This will create a standalone application in the `dist` folder.
 
 ## Usage
 
@@ -76,7 +66,7 @@ ctx-builder /path/to/project
 
 ## Requirements
 
-- Python 3.8+
+- Python 3.10+
 - PyQt6
 - Click
 
