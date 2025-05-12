@@ -23,22 +23,22 @@ git clone https://github.com/yourusername/context-builder.git
 cd context-builder
 ```
 
-2. Install the requirements:
+2. Install using UV:
 ```bash
-pip install -r requirements.txt
+uv sync
 ```
 
-3. Install the package:
+3. Install the package in development mode:
 ```bash
-pip install -e .
+uv pip install -e .
 ```
 
-### Option 3: Build macOS app bundle
+### Option 2: Build macOS app bundle
 
 To create a standalone macOS application:
 
 ```bash
-python setup.py py2app
+uv run py2app
 ```
 
 This will create a standalone application in the `dist` folder.
@@ -66,8 +66,7 @@ ctx-builder /path/to/project
 3. Check the files you want to include in your context
 4. Select your preferred output format (XML, Markdown)
 5. Optionally enable line numbers
-6. Click "Generate Preview" to see the output
-7. Use "Copy to Clipboard" or "Save to File" to export your context
+6. Use "Copy to Clipboard" or "Save to File" to export your context
 
 ## Format Options
 

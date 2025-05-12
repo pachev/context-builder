@@ -4,10 +4,11 @@ Context Builder - A native macOS app for building context files for LLMs
 
 import os
 import sys
+import signal
 from fnmatch import fnmatch
 from PyQt6.QtWidgets import (
-    QApplication, QMainWindow, QSplitter, QTreeView, QTextEdit, 
-    QVBoxLayout, QHBoxLayout, QWidget, QCheckBox, QLabel, 
+    QApplication, QMainWindow, QSplitter, QTreeView, QTextEdit,
+    QVBoxLayout, QHBoxLayout, QWidget, QCheckBox, QLabel,
     QPushButton, QFileDialog, QComboBox, QStatusBar, QToolBar, QStyle
 )
 from PyQt6.QtCore import Qt, QDir, QModelIndex, QSize
@@ -460,19 +461,33 @@ class ContextBuilder(QMainWindow):
             except Exception as e:
                 self.statusBar.showMessage(f"Error saving file: {str(e)}", 5000)
 
+def signal_handler(sig, frame):
+    """Handle SIGINT (Ctrl+C) signal to gracefully close the application"""
+    QApplication.quit()
+
 def main():
     app = QApplication(sys.argv)
     app.setApplicationName("Context Builder")
-    
+
+    # Set up signal handler for Ctrl+C
+    signal.signal(signal.SIGINT, signal_handler)
+
     window = ContextBuilder()
     window.show()
-    
+
     # If a directory was passed as argument, open it
     if len(sys.argv) > 1 and os.path.isdir(sys.argv[1]):
         window.current_dir = sys.argv[1]
         window.file_tree.model.load_directory(sys.argv[1])
         window.setWindowTitle(f"Context Builder - {os.path.basename(sys.argv[1])}")
-    
+
+    # Create a timer to allow Python to process SIGINT
+    # This is needed because Qt's event loop doesn't let Python check for signals frequently
+    from PyQt6.QtCore import QTimer
+    timer = QTimer()
+    timer.start(500)  # 500ms interval
+    timer.timeout.connect(lambda: None)  # Just wake up Python interpreter
+
     sys.exit(app.exec())
 
 if __name__ == "__main__":
