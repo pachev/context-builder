@@ -1,0 +1,42 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "context-builder"
+version = "0.1.0"
+description = "A GUI tool for building context files for LLMs"
+authors = [{name = "Pachev Joseph", email = "pachev@elpajo.com"}]
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "PyQt6>=6.2.0",
+    "click>=8.0.0",
+]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Environment :: MacOS X",
+    "Intended Audience :: Developers",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "License :: OSI Approved :: Apache License, Version 2.0",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Topic :: Utilities",
+]
+
+[project.scripts]
+ctx-builder = "context_builder.cli:main"
+
+[project.urls]
+"Homepage" = "https://github.com/pachev/context-builder"
+"Bug Tracker" = "https://github.com/pachev/context-builder/issues"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+context_builder = ["*.py"]
+
+[tool.uv]
