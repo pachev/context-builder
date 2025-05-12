@@ -57,8 +57,8 @@ select = [
   # unused arguments
   "ARG",
   # typing.TYPE_CHECKING misuse
-  "TCH004",
-  "TCH005",
+  "TC004",
+  "TC005",
   # import rules
   "TID251",
 ]
@@ -80,18 +80,6 @@ extra-standard-library = ["typing_extensions"]
 quote-style = "single"
 docstring-code-format = true
 
-[tool.pyright]
-include = [
-    "src",
-    "tests",
-]
-exclude = []
-typeCheckingMode = "strict"
-reportImportCycles = false
-reportPrivateUsage = false
-
-reportCallInDefaultInitializer = true
-reportImplicitStringConcatenation = true
 
 [dependency-groups]
 dev = [
