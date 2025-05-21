@@ -1,6 +1,6 @@
 # Context Builder
 
-A native macOS app for building context files for LLMs. This tool allows you to visually select files from your projects and generate formatted context documents suitable for prompting large language models. Largely inspired by [Simon Willison's files-to-prompt project](https://github.com/simonw/files-to-prompt/tree/main)
+A  macOS app for building context files for LLMs built in python. This tool allows you to visually select files from your projects and generate formatted context documents suitable for prompting large language models. Largely inspired by [Simon Willison's files-to-prompt project](https://github.com/simonw/files-to-prompt/tree/main)
 
 ![Context Builder Screenshot](./docs/ctx-builder-0.png)
 
