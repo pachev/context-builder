@@ -237,11 +237,13 @@ def generate_output(
                     result_lines.extend([f'--- File: {rel_path} ---', content, '--- End File ---', ''])
                 elif output_format == 'xml':
                     file_ext = os.path.splitext(rel_path)[1].lstrip('.')
-                    result_lines.extend([
-                        f'<file path="{escape_xml(rel_path)}" type="{escape_xml(file_ext)}">',
-                        escape_xml(content),
-                        '</file>',
-                    ])
+                    result_lines.extend(
+                        [
+                            f'<file path="{escape_xml(rel_path)}" type="{escape_xml(file_ext)}">',
+                            escape_xml(content),
+                            '</file>',
+                        ]
+                    )
                 elif output_format == 'markdown':
                     lang = EXT_TO_LANG.get(file_path.split('.')[-1].lower(), '')
                     result_lines.extend([f'**File:** `{rel_path}`', f'```{lang}', content, '```', ''])
