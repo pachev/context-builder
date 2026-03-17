@@ -5,38 +5,38 @@ Browse project files, select what to include, generate formatted context for LLM
 """
 
 import os
-import subprocess
 import sys
+import subprocess
 from typing import Optional
 
-from rich.text import Text
 from textual import work
+from rich.text import Text
 from textual.app import App, ComposeResult
-from textual.binding import Binding
-from textual.containers import Horizontal, Vertical
-from textual.message import Message
-from textual.reactive import reactive
 from textual.timer import Timer
+from textual.binding import Binding
+from textual.message import Message
 from textual.widgets import (
+    Rule,
+    Tree,
+    Label,
     Button,
     Footer,
     Header,
-    Label,
-    Rule,
     Select,
     Static,
     Switch,
     TextArea,
-    Tree,
 )
+from textual.reactive import reactive
+from textual.containers import Vertical, Horizontal
 from textual.widgets.tree import TreeNode
 
 from context_builder.utils import (
+    should_ignore,
+    read_gitignore,
     estimate_tokens,
     generate_output,
     is_likely_binary_file,
-    read_gitignore,
-    should_ignore,
 )
 
 # --- Custom File Tree Widget ---
@@ -115,7 +115,7 @@ class CheckboxFileTree(Tree[dict]):
             node.remove_children()
             self._load_children(node.data['path'], node)
 
-    def render_label(self, node: TreeNode, base_style, style) -> Text:
+    def render_label(self, node: TreeNode, _base_style, style) -> Text:
         """Render checkbox prefix on each node."""
         if node.data is None:
             return Text('...')
