@@ -27,14 +27,14 @@ git clone https://github.com/pachev/context-builder
 cd context-builder
 ```
 
-2. Install using UV:
+2. Install dependencies:
 ```bash
 uv sync
 ```
 
-3. Install the package in development mode:
+3. Install globally:
 ```bash
-uv pip install -e .
+uv tool install -e .
 ```
 
 ## Usage
